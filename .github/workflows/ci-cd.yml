@@ -3,7 +3,7 @@ name: CI/CD - invoice-billing-service Deploy to Google Cloud Run
 on:
   push:
     branches:
-      - feature-adarsha
+      - feature-test-health
   pull_request:
     branches:
       - main
