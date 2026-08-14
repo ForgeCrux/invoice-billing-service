@@ -18,7 +18,7 @@ import jakarta.annotation.Generated;
 /**
  * UpdateInvoiceRequest
  */
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-08-14T08:34:39.853488103Z[GMT]")public class UpdateInvoiceRequest {
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-08-14T08:53:29.363795320Z[GMT]")public class UpdateInvoiceRequest {
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate dueDate;
