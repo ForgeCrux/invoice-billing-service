@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 import com.probestack.forgestudio.design.service.InvoicesService;
 import com.probestack.forgestudio.design.validation.GeneratedRequestValidator;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-08-14T08:34:39.853488103Z[GMT]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-08-14T08:53:29.363795320Z[GMT]")
 @Controller
 @RequestMapping("${openapi.invoiceBillingService.base-path:/v1}")
 public class InvoicesApiController implements InvoicesApi {

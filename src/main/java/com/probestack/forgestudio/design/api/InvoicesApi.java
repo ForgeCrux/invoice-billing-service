@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-08-14T08:34:39.853488103Z[GMT]")@Validated
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-08-14T08:53:29.363795320Z[GMT]")@Validated
 @Tag(name = "Invoices", description = "Operations on customer invoices")
 public interface InvoicesApi {
 

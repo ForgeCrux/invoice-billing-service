@@ -1,6 +1,6 @@
 {
   "info" : {
-    "_postman_id" : "52b31814-5fea-4a27-9e47-afcf65b03c59",
+    "_postman_id" : "f4201fd2-a72f-41cd-a4c0-a960fd440ae1",
     "name" : "Invoice Billing Service",
     "description" : "Generated Postman collection for invoice-billing-service",
     "schema" : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -31,6 +31,60 @@
     "type" : "string"
   } ],
   "item" : [ {
+    "name" : "Health",
+    "item" : [ {
+      "name" : "Health",
+      "request" : {
+        "auth" : {
+          "type" : "noauth"
+        },
+        "method" : "GET",
+        "header" : [ {
+          "key" : "Accept",
+          "value" : "application/json"
+        } ],
+        "url" : {
+          "raw" : "{{baseUrl}}/actuator/health",
+          "host" : [ "{{baseUrl}}" ],
+          "path" : [ "actuator", "health" ]
+        }
+      }
+    }, {
+      "name" : "Liveness",
+      "request" : {
+        "auth" : {
+          "type" : "noauth"
+        },
+        "method" : "GET",
+        "header" : [ {
+          "key" : "Accept",
+          "value" : "application/json"
+        } ],
+        "url" : {
+          "raw" : "{{baseUrl}}/actuator/health/liveness",
+          "host" : [ "{{baseUrl}}" ],
+          "path" : [ "actuator", "health", "liveness" ]
+        }
+      }
+    }, {
+      "name" : "Readiness",
+      "request" : {
+        "auth" : {
+          "type" : "noauth"
+        },
+        "method" : "GET",
+        "header" : [ {
+          "key" : "Accept",
+          "value" : "application/json"
+        } ],
+        "url" : {
+          "raw" : "{{baseUrl}}/actuator/health/readiness",
+          "host" : [ "{{baseUrl}}" ],
+          "path" : [ "actuator", "health", "readiness" ]
+        }
+      }
+    } ]
+  }, {
     "name" : "Security",
     "item" : [ {
       "name" : "Get OAuth2 Token",
