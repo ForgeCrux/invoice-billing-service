@@ -1,0 +1,210 @@
+{
+  "info" : {
+    "_postman_id" : "52b31814-5fea-4a27-9e47-afcf65b03c59",
+    "name" : "Invoice Billing Service",
+    "description" : "Generated Postman collection for invoice-billing-service",
+    "schema" : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable" : [ {
+    "key" : "baseUrl",
+    "value" : "http://localhost:8080",
+    "type" : "string"
+  }, {
+    "key" : "bearerToken",
+    "value" : "",
+    "type" : "string"
+  }, {
+    "key" : "resourceId",
+    "value" : "sample-id",
+    "type" : "string"
+  }, {
+    "key" : "clientId",
+    "value" : "generated-service-client",
+    "type" : "string"
+  }, {
+    "key" : "clientSecret",
+    "value" : "change-me",
+    "type" : "string"
+  }, {
+    "key" : "scope",
+    "value" : "api.read api.write",
+    "type" : "string"
+  } ],
+  "item" : [ {
+    "name" : "Security",
+    "item" : [ {
+      "name" : "Get OAuth2 Token",
+      "request" : {
+        "auth" : {
+          "type" : "basic",
+          "basic" : [ {
+            "key" : "username",
+            "value" : "{{clientId}}",
+            "type" : "string"
+          }, {
+            "key" : "password",
+            "value" : "{{clientSecret}}",
+            "type" : "string"
+          } ]
+        },
+        "method" : "POST",
+        "header" : [ {
+          "key" : "Content-Type",
+          "value" : "application/x-www-form-urlencoded"
+        }, {
+          "key" : "Accept",
+          "value" : "application/json"
+        } ],
+        "body" : {
+          "mode" : "urlencoded",
+          "urlencoded" : [ {
+            "key" : "grant_type",
+            "value" : "client_credentials",
+            "type" : "text"
+          }, {
+            "key" : "scope",
+            "value" : "{{scope}}",
+            "type" : "text"
+          } ]
+        },
+        "url" : {
+          "raw" : "{{baseUrl}}/oauth2/token",
+          "host" : [ "{{baseUrl}}" ],
+          "path" : [ "oauth2", "token" ]
+        }
+      },
+      "event" : [ {
+        "listen" : "test",
+        "script" : {
+          "type" : "text/javascript",
+          "exec" : [ "const json = pm.response.json();", "if (json.access_token) {", "  pm.collectionVariables.set(\"bearerToken\", json.access_token);", "}" ]
+        }
+      } ]
+    } ]
+  }, {
+    "name" : "Invoices",
+    "item" : [ {
+      "name" : "List all invoices",
+      "request" : {
+        "method" : "GET",
+        "header" : [ {
+          "key" : "Authorization",
+          "value" : "Bearer {{bearerToken}}"
+        }, {
+          "key" : "Accept",
+          "value" : "application/json"
+        } ],
+        "url" : {
+          "raw" : "{{baseUrl}}/invoices?customerId={{resourceId}}&status=DRAFT&page=1&size=1",
+          "host" : [ "{{baseUrl}}" ],
+          "path" : [ "invoices" ],
+          "query" : [ {
+            "key" : "customerId",
+            "value" : "{{resourceId}}"
+          }, {
+            "key" : "status",
+            "value" : "DRAFT"
+          }, {
+            "key" : "page",
+            "value" : 1
+          }, {
+            "key" : "size",
+            "value" : 1
+          } ]
+        }
+      }
+    }, {
+      "name" : "Create a new invoice",
+      "request" : {
+        "method" : "POST",
+        "header" : [ {
+          "key" : "Authorization",
+          "value" : "Bearer {{bearerToken}}"
+        }, {
+          "key" : "Content-Type",
+          "value" : "application/json"
+        }, {
+          "key" : "Accept",
+          "value" : "application/json"
+        } ],
+        "url" : {
+          "raw" : "{{baseUrl}}/invoices",
+          "host" : [ "{{baseUrl}}" ],
+          "path" : [ "invoices" ]
+        },
+        "body" : {
+          "mode" : "raw",
+          "raw" : "{\n  \"customerId\" : \"cust-88213\",\n  \"lineItems\" : [ {\n    \"unitPrice\" : 100.0,\n    \"quantity\" : 12,\n    \"taxRatePercent\" : 18.0,\n    \"description\" : \"Platform subscription - August 2026\"\n  }, {\n    \"unitPrice\" : 100.0,\n    \"quantity\" : 12,\n    \"taxRatePercent\" : 18.0,\n    \"description\" : \"Platform subscription - August 2026\"\n  } ],\n  \"currency\" : \"USD\",\n  \"dueDate\" : 1788134400000,\n  \"purchaseOrderRef\" : \"PO-4471\"\n}",
+          "options" : {
+            "raw" : {
+              "language" : "json"
+            }
+          }
+        }
+      }
+    }, {
+      "name" : "Void an invoice",
+      "request" : {
+        "method" : "DELETE",
+        "header" : [ {
+          "key" : "Authorization",
+          "value" : "Bearer {{bearerToken}}"
+        }, {
+          "key" : "Accept",
+          "value" : "application/json"
+        } ],
+        "url" : {
+          "raw" : "{{baseUrl}}/invoices/{{{resourceId}}}",
+          "host" : [ "{{baseUrl}}" ],
+          "path" : [ "invoices", "{{{resourceId}}}" ]
+        }
+      }
+    }, {
+      "name" : "Get an invoice by ID",
+      "request" : {
+        "method" : "GET",
+        "header" : [ {
+          "key" : "Authorization",
+          "value" : "Bearer {{bearerToken}}"
+        }, {
+          "key" : "Accept",
+          "value" : "application/json"
+        } ],
+        "url" : {
+          "raw" : "{{baseUrl}}/invoices/{{{resourceId}}}",
+          "host" : [ "{{baseUrl}}" ],
+          "path" : [ "invoices", "{{{resourceId}}}" ]
+        }
+      }
+    }, {
+      "name" : "Update an existing invoice",
+      "request" : {
+        "method" : "PUT",
+        "header" : [ {
+          "key" : "Authorization",
+          "value" : "Bearer {{bearerToken}}"
+        }, {
+          "key" : "Content-Type",
+          "value" : "application/json"
+        }, {
+          "key" : "Accept",
+          "value" : "application/json"
+        } ],
+        "url" : {
+          "raw" : "{{baseUrl}}/invoices/{{{resourceId}}}",
+          "host" : [ "{{baseUrl}}" ],
+          "path" : [ "invoices", "{{{resourceId}}}" ]
+        },
+        "body" : {
+          "mode" : "raw",
+          "raw" : "{\n  \"dueDate\" : 1789430400000,\n  \"purchaseOrderRef\" : \"PO-4488\",\n  \"lineItems\" : [ {\n    \"unitPrice\" : 100.0,\n    \"quantity\" : 12,\n    \"taxRatePercent\" : 18.0,\n    \"description\" : \"Platform subscription - August 2026\"\n  }, {\n    \"unitPrice\" : 100.0,\n    \"quantity\" : 12,\n    \"taxRatePercent\" : 18.0,\n    \"description\" : \"Platform subscription - August 2026\"\n  } ]\n}",
+          "options" : {
+            "raw" : {
+              "language" : "json"
+            }
+          }
+        }
+      }
+    } ]
+  } ]
+}
