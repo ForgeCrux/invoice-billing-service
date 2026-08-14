@@ -144,6 +144,27 @@ app.exception.include-correlation-id=true
 ```
 
 
+## Observability
+
+This generated service includes observability assets because `frameworkOptions.observability=true` was selected.
+
+The generated README summarizes the exact observability options selected for this service and lists only the actuator endpoints that were enabled.
+
+Selected options:
+
+- Health Checks
+
+Full documentation:
+
+- [Observability User Guide](docs/observability/observability_user_guide.md)
+
+Enabled actuator endpoints:
+
+- `/actuator/health`
+- `/actuator/health/liveness`
+- `/actuator/health/readiness`
+
+
 ## Enterprise Logging
 
 This generated service includes configuration-driven HTTP logging because `frameworkOptions.enterpriseLogging=true` was selected.
